@@ -1,0 +1,111 @@
+
+
+<div class="row" ng-repeat="v in data">
+    <aside class="col-md-2 col-sm-3 col-xs-12 main-content sidebar">
+        <div class="widget">
+            <img  src="{{v.image}}"  width="100%">
+        </div>
+    </aside>
+
+    <main class="col-md-10 main-content">
+        <article id="1" class="post">
+            <div class="post-head">
+                <h3 class="post-title">
+                    <a for-name="{{v.name}}">{{v.name}}</a>
+                </h3>
+                <div class="post-meta">
+                    <span class="author">类型：
+                        <a for-typename="{{v.typename}}">{{v.typename}}</a>
+                    </span>
+                </div>
+            </div>
+            <div class="post-content">
+                <p for-performer="{{v.performer}}">
+                    主演:{{v.performer}}
+                </p>
+            </div>
+            <span class="text" for-introduce="{{v.introduce}}">
+                <!--                            香港探员陈港生（成龙饰）跟中黑道老大维克多•王（张文轩饰）长达数十年，
+                                            为搜集他犯罪证据未被卷入一场“计中计”中，还将自己的侄女白舒（范冰冰饰）牵扯进来，
+                                            在这场被中国特警，维克多•王、俄罗斯黑帮三面加工的“绝地逃亡”中，班尼解释了共患难的最佳拍档是哪（约翰尼•诺克斯维尔式）
+                                            ，一位正被维克多•王和俄国杀手追普逃命的美国赌博高手，三人最终怎样结束这场冒险变得扑朔迷离。-->
+                {{v.introduce}}
+            </span>
+        </article>
+
+
+    </main>
+
+</div>
+<div class="mian_header">
+    <div class="main_line"> </div>热门影评
+</div>
+
+<div class="main" id="comment_list">
+    <div class="row rowtwo" >
+        <aside class="col-md-1 col-sm-1 col-xs-1 main-content sidebar">
+            <div class="widget two">
+                <img src="./images/p2499790488.webp" >
+            </div>
+        </aside>
+
+        <main class="col-md-11 col-sm-11 col-xs-11 main-content">
+            <article id="1" class="post">
+                <div class="post-head">
+                    <div class="post-meta col-lg-12">
+                        <span class="author">
+                            <a href="#">匿名</a>
+                        </span>
+                    </div>
+                    <div class="post-meta col-lg-11 col-md-10 col-sm-9 col-xs-9 main_center">
+                        <span class="author">
+                            <a href="#">福娃发射点发</a>
+                        </span>
+                    </div>
+                    <div class="post-meta col-lg-1 col-md-2 col-sm-3 col-xs-3">
+                        <span class="author">
+                            8月11日
+                        </span>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+</div>
+
+
+<textarea class="textarea" placeholder="请输入评论内容！" id="textarea"></textarea>
+<div class="row">
+    <aside class="col-md-1 col-lg-1 col-sm-2 col-xs-2 col-md-offset-11 col-lg-offset-11 col-sm-offset-10 col-xs-offset-10">
+        <input type="button" value="评论" class="submit" id="submit">
+    </aside>
+</div>
+
+<script type="text/javascript">
+    $("#submit").click(function () {
+        var text = $("#textarea").val();
+        if (text == "") {
+            alert("请输入评论内容！！");
+        } else {
+            $.ajax({
+                type: "post",
+                url: "./php/textarea.php",
+                data: {text: text},
+                success: function (data) {
+                    data = $.parseJSON(data);
+                    var text = data.data.content;
+                    var time = data.data.add_time;
+                    if (data.status == 1) {
+                        alert(data.msg);
+                    } else if (data.status == 2) {
+                        alert(data.msg);
+                    } else {
+                        var str = '<div class="row rowtwo"><aside class="col-md-1 col-sm-1 col-xs-1 main-content sidebar"><div class="widget two"><img src="./images/p2499790488.webp" ></div></aside><main class="col-md-11 col-sm-11 col-xs-11 main-content"><article id="1" class="post"><div class="post-head"><div class="post-meta col-lg-12"><span class="author"><a href="#">匿名</a></span></div><div class="post-meta col-lg-11 col-md-10 col-sm-9 col-xs-9 main_center"><span class="author"><a href="#">' + text + '</a></span></div><div class="post-meta col-lg-1 col-md-2 col-sm-3 col-xs-3"><span class="author">' + time + '</span></div></div></article></main></div>';
+                        $("#comment_list").append(str);
+                        alert("发表成功！");
+                    }
+                }
+            })
+        }
+    })
+</script>

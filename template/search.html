@@ -1,0 +1,13 @@
+<div class="row" >
+    <!--ng-controller="indexControler"-->
+    <image-list ng-repeat="v in data" for-image="{{v.image}}" for-name="{{v.name}}"  for-year="{{v.year}}" for-typename="{{v.typename}}" >
+    </image-list>
+    <!--ui-sref="details({id:v.id})"-->
+    <nav class="pagination page" role="navigation">
+        <ul class="pagination">
+            <li><a ng-show="last" ng-click="getDate(page-1);">上一页</a></li>
+            <li class="active"><a ng-repeat="v in pageArr" ng-click="getData(v);">{{v}}</a></li>
+            <li><a ng-show="next" ng-click="getDate(page+1);">下一页</a></li>
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,79 @@
+*{
+    margin: 0 auto;
+    padding: 0px;
+}
+.menu{
+    background-color:#EFF3F6;
+}
+.navbar{
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: #384555;
+    border: 0px;
+    border-radius: 0px;
+    float: none;
+    
+    
+}
+.navbar-text{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: white;
+    font-weight: bold;
+}
+.navbar-header a:hover, a:focus{
+    color: yellow;
+}
+
+
+.logo_top{
+    text-align: center;
+    font-size: 55px;
+    color: #2B8FC8;
+}
+.btn-default{
+    background-color: #238BCC;
+}
+.glyphicon{
+    top: 0px; 
+}
+
+.logo_search{
+    margin-top: 20px;
+}
+.menu .icon-bar{
+    background-color: white;
+    height: 3px;
+}
+.menu hr{
+    border: 2px solid #E9EDF0;
+}
+.navbar{
+    margin-bottom: 0px;
+}
+.navbar-nav{
+    /*margin-left: 30%;*/
+}
+.navbar-nav > li{
+    margin: 0px 15px;
+}
+.navbar-nav > li > a{
+    font-size: 17px;
+    color: black;
+}
+.navbar-nav > li>a:hover{
+    background-color: #EFF3F6;
+    color: #8AB8DD;
+    border-bottom: 1px solid #8AB8DD;
+}
+.menu-active{
+     border-bottom: 1px solid #8AB8DD;
+}
+.menu_back{
+    background-color: blue;
+}
+
+
+
+
+

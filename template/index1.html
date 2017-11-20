@@ -1,0 +1,16 @@
+
+<div class="row" >
+    <!--ng-controller="indexControler"-->
+    <a ng-repeat="v in data" ui-sref="detail({id:v.id})" ui-sref-active="menu-active">
+    <image-list  for-image="{{v.image}}" for-name="{{v.name}}"  for-year="{{v.year}}" for-typename="{{v.typename}}" >
+    </image-list>
+    </a>
+    <!--ui-sref="details({id:v.id})"-->
+    <nav class="pagination page" role="navigation">
+        <ul class="pagination" >
+            <li><a ng-show="last" ng-click="getDate(page-1);" ui-sref-active="menu_back">上一页</a></li>
+            <li><a ng-repeat="v in pageArr" ng-click="getData(v);" ui-sref-active="menu_back">{{v}}</a></li>
+            <li><a ng-show="next" ng-click="getDate(page+1);" ui-sref-active="menu_back">下一页</a></li>
+        </ul>
+    </nav>
+</div>

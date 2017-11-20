@@ -1,0 +1,167 @@
+<style>
+    p{
+        margin: 0px;
+        font-family: "微软雅黑";
+        font-weight: 500;
+    }
+    input{
+        margin:4px 0px 20px 0px;
+        outline:0;
+        border: 1px solid gainsboro;
+    }
+    .abstract{
+        margin-top:20px;
+    }
+    .is_show,.is_hot{
+        margin-top: 10px;
+    }
+    select{
+        width:32%;
+        outline:0;
+    }
+    input:nth-type-of(2){
+        margin-left:5px;
+    }
+    .textarea{
+        width:50%;
+        height: 100px;
+        outline:0;
+    }
+    .submit{
+        display: inline-block;
+        border: 1px solid gainsboro;
+        width: 32%;
+        padding:2px;
+        text-align: center;
+        line-height:25px;
+        margin:20px 0px;
+        cursor:pointer;
+    }
+    #show{
+        margin-top:250px;
+        margin-left:215px;
+        transform:scale(15);
+    }
+</style>
+
+
+<div class="row" >
+    <form method="get" action="" class="new-searching-unit" id="formId" data-regestered="regestered" enctype="multipart/form-data">
+        <main class="col-md-6 main-content">
+            <article id="1" class="post">
+                <div class="featured-media">
+                    <a href="javascript:;">
+                        <img src="./images/p2499585722.webp" class="fearured-iamges" width="80%" id="img">
+<!--                        <div class="glyphicon glyphicon-plus" id="show"></div>-->
+                        <div style="display:none;">
+                            <input type="file" name="file" id="upload"/>
+                        </div>
+                        <input type="hidden" name="fileUrl" id="fileUrl"/>
+                    </a>
+                </div>
+            </article>
+        </main>
+        <aside class="col-md-6 sidebar">
+
+            <div class="widget">
+
+                <p>影片名:</p><input type="text" placeholder="请输入影片名" id="name">
+                <p>主演:</p><input type="text" placeholder="请输入主演名称"  id="performer">
+                <p>年份:</p><input type="text" placeholder="请输入年份" id="year">
+                <p>分类:</p>
+                <select id="type">
+                    <option value="">喜剧</option>
+                    <option value="">悬疑</option>
+                    <option value="">惊恐</option>
+                    <option value="">动作</option>
+                    <option value="">爱情</option>
+                    <option value="">灾难</option>
+                </select>
+
+                <p>评分:</p><input type="text" placeholder="请输入评分" id="score">
+                <p class="is_show">是否上映:</p>
+                <input type="radio" name="show" value="是" checked id="is_show" />是
+                <input type="radio" name="show" value="否"  id="is_show"/>否
+                <p class="is_hot">是否热门:</p>
+                <input type="radio" name="hot" value="是" checked id="is_hot" />是
+                <input type="radio" name="hot" value="否" id="is_hot"/>否
+                <p class="abstract">简介</p>
+                <textarea class="textarea" placeholder="请输入简介" id="introduce">
+                </textarea>
+                <br>
+                <input type="button" value="发布影片" class="submit">
+
+            </div>
+
+        </aside>
+    </form>
+</div>
+<!--<?php
+
+$name = $_GET["name"];
+$performer=$_GET["performer"];
+$year = $_GET["year"];
+$type=$_GET["type"];
+$score=$_GET["score"];
+$is_show=$_GET["is_show"];
+$is_hot=$_GET["is_hot"];
+$introduce=$_GET["introduce"];-->
+<script type="text/javascript">
+$("#img").click(function(){
+        $("input[name=file]").click();
+    });
+    $("#upload").change(function(){
+        
+        //实例化formData类，然后传入form表单元素
+        var formData = new FormData($("form")[0]);
+        
+        //formData追加元素
+        formData.append("file", $("#upload")[0].files[0]);
+        $.ajax({
+            type:"post",
+            url:"http://localhost/php/douban/php/upimg.php",
+            data:formData,
+            //必须写
+            contentType:false,
+            processData:false,
+            success:function(data){
+                data = $.parseJSON(data);
+                if(data.status){
+                    $("#img").attr("src",data.url);
+                    $("#fileUrl").val(data.url);
+                }else{
+                    alert(data.msg);
+                }
+            }
+        })
+    });
+</script>
+<script type="text/javascript">
+    $(".submit").click(function () {
+        var name = $("#name").val();
+        var performer = $("#performer").val();
+        var year = $("#year").val();
+        var type = $("#type").val();
+        var score = $("#score").val();
+        var is_hot = $("#is_hot").val();
+        var is_show = $("#is_show").val();
+        var introduce = $("#introduce").val();
+
+        $.ajax({
+            type: "post",
+            url: "http://localhost/php/douban/php/publish.php",
+            data: {name: name, performer: performer, year: year, type: type, score: score, is_hot: is_hot, is_show: is_show, introduce: introduce},
+            success: function (data) {
+                data = $.parseJSON(data);
+                if (data.status == 1) {
+                    alert(data.msg);
+                } else if (data.status == 2) {
+                    alert(data.msg);
+                } else {
+                    alert(data.msg);
+                }
+            }
+        })
+    }
+    );
+</script>

@@ -1,0 +1,22 @@
+
+<div class="row" >
+    <!--ng-controller="indexControler"-->
+    <div class="type">影片类型: &nbsp;
+        <a href="">喜剧</a>&nbsp;
+        <a href="">悬疑</a>&nbsp;
+        <a href="">惊恐</a>&nbsp;
+        <a href="">动作</a>&nbsp;
+        <a href="">爱情</a>&nbsp;
+        <a href="">青春</a>   
+    </div>
+    <image-list ng-repeat="v in data" for-image="{{v.image}}" for-name="{{v.name}}"  for-year="{{v.year}}" for-typename="{{v.typename}}" >
+    </image-list>
+    <!--ui-sref="details({id:v.id})"-->
+    <nav class="pagination page" role="navigation">
+        <ul class="pagination" >
+            <li><a ng-show="last" ng-click="getDate(page-1);" ui-sref-active="menu_back">上一页</a></li>
+            <li><a ng-repeat="v in pageArr" ng-click="getData(v);" ui-sref-active="menu_back">{{v}}</a></li>
+            <li><a ng-show="next" ng-click="getDate(page+1);" ui-sref-active="menu_back">下一页</a></li>
+        </ul>
+    </nav>
+</div>
